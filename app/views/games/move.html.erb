@@ -1,4 +1,4 @@
 <%= link_to "I am in room #{@player}", games_move_path, class: 'button round' %>
-<%= link_to "Go to room #{@first_room}", games_move_path, class: 'button round' %>
-<%= link_to "Go to room #{@second_room}", games_move_path, class: 'button round' %>
-<%= link_to "Go to room #{@third_room}", games_move_path, class: 'button round' %>
+<%= button_to "#{@first_room}", action: "move", params: { player: @first_room } %>
+<%= button_to "#{@second_room}", action: "move", params: { player: @second_room } %>
+<%= button_to "#{@third_room}", action: "move", params: { player: @third_room } %>
