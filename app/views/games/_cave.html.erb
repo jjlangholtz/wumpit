@@ -1,21 +1,89 @@
+<div class="left icon-bar vertical three-up">
+  <a href="<%= root_path %>" class="item">
+    <i class="fa fa-home"></i>
+    <label>Home</label>
+  </a>
+  <a href="#" data-reveal-id="myModal" class="item">
+    <i class="fa fa-file-text-o"></i>
+    <label>Rules</label>
+  </a>
+  <a href="<%= games_start_path %>" class="item">
+    <i class="fa fa-power-off"></i>
+    <label>Start</label>
+  </a>
+</div>
+
 <div class="row">
-  <div class="columns large-3">
+  <div class="columns large-10">
+    <div class="row">
+      <div class="columns large-centered large-5">
+        <% flash.each do |name, msg| -%>
+          <% if msg.is_a?(String) %>
+            <div data-alert class="alert-box warning round <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+              <%= content_tag :div, msg %>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="columns large-5 text-center">
+        <%= button_to "#{@left_room}", { action: "move", params: { player: @left_room } }, class: 'button round' %>
+        <%= link_to games_shoot_left_path do %>
+          <i class="fa fa-bomb"></i>
+        <% end %>
+      </div>
+      <div class="columns large-2 text-center">
+        <i class="fa fa-user"></i></br>
+        <p class="label round"><%= "Room #{@player}" %></p>
+      </div>
+      <div class="columns large-5 text-center">
+        <%= button_to "#{@right_room}", { action: "move", params: { player: @right_room } }, class: 'button round' %>
+        <%= link_to games_shoot_right_path do %>
+          <i class="fa fa-bomb"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="columns large-centered large-10 text-center">
+        <%= button_to "#{@back_room}", { action: "move", params: { player: @back_room } }, class: 'button round' %>
+        <%= link_to games_shoot_back_path do %>
+          <i class="fa fa-bomb"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns large-2">
+    <h3><strong>Ammo</strong></h3>
     <% @arrow.times do %>
-      <i class="fa fa-long-arrow-right"></i></br>
+      <i class="fa fa-bomb"></i></br>
     <% end %>
   </div>
-  <div class="columns large-3">
-    <%= button_to "#{@first_room}", { action: "move", params: { player: @first_room } }, class: 'button round' %>
-    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
-  </div>
-  <div class="columns large-3">
-    <i class="fa fa-user"></i></br>
-    <%= "I am in room #{@player}" %>
-    <%= button_to "#{@second_room}", { action: "move", params: { player: @second_room } }, class: 'button round' %>
-    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
-  </div>
-  <div class="columns large-3">
-    <%= button_to "#{@third_room}", { action: "move", params: { player: @third_room } }, class: 'button round' %>
-    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
-  </div>
+</div>
+
+<div id="myModal" class="reveal-modal" data-reveal>
+  <h2>INTRODUCTION</h2>
+  <p class="lead">Deep within a maze of caverns and twisting tunnels lives a creature 
+known as the Wumpus. Protected by giant bats and pits of slime, the 
+Wumpus feeds on unwary visitors to its cavern.</p>
+  <p>You are the hunter who tracks the Wumpus to its lair! Armed 
+with a five arrows, you explore the maze of caverns, searching for 
+clues to tell you where the Wumpus is hiding. Once you think you've 
+found the Wumpus, you fire your arrow into its cavern.</p>
+  <p>The Wumpit on Rails combines the excitement of a hunt with a new more engaging interface.</p>
+  <p>Play each game in a new, randomly generated maze
+Choose a maze based on your own level of skill (coming soon)
+Challenge your powers of deduction, memory, and concentration with 
+exciting options you can include in the hunt.</p>
+  <h2>GETTING STARTED</h2>
+  <p>Option Selection
+  In the initial release you can choose from one option (blindfold).  In future releases we plan to make the game easier by providing a full map to view where you are and where you have been in the cave as well as more challenging caves as well.</p>
+  <p>BLINDFOLD - The Blindfold option tests your memory by erasing the map 
+behind you. Only the cavern or tunnel segment you are in appears on 
+the screen (current version)</p>
+  <a class="close-reveal-modal">&#215;</a>
 </div>

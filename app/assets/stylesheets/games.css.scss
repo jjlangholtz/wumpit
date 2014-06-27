@@ -1,4 +1,37 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+i {
+  font-size: 72px;
+}
 
+i.fa.fa-bomb {
+  margin-left: 25px;
+  font-size: 40px;
+}
+
+a i.fa.fa-bomb {
+  font-size: 50px;
+  color: #f08a24;
+}
+
+.alert-box {
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.row {
+  margin-top: 10px;
+}
+
+.vertical {
+  margin-top: -10px;
+}
+
+.label {
+  background-color: #f08a24;
+}
+
+.reveal-modal p {
+  font-size: 0.8em;
+}

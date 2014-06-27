@@ -27,9 +27,11 @@ class GamesController < ApplicationController
       redirect_to games_bat_path
     end
     if @game.room_has_pit?(@player)
+      flash[:lose] = "You have fallen into a pit!"
       redirect_to games_lose_path
     end
     if @game.room_has_wumpit?(@player)
+      flash[:lose] = "You have been eaten by the wumpit!"
       redirect_to games_lose_path
     end
     next_rooms
@@ -47,10 +49,11 @@ class GamesController < ApplicationController
     room_choices
   end
 
-  def shoot
+  def shoot_back
     @arrow = @game.arrow
     @game.update(arrow: @arrow -= 1)
     if @arrow == 0
+      flash[:lose] = "You have run out of ammo!"
       redirect_to games_lose_path
     end
     @player = @game.player
@@ -58,10 +61,49 @@ class GamesController < ApplicationController
     next_rooms
     check_senses
     room_choices
+    if @back_room == @game.wumpit
+      redirect_to games_win_path
+    end
+  end
+
+  def shoot_right
+    @arrow = @game.arrow
+    @game.update(arrow: @arrow -= 1)
+    if @arrow == 0
+      flash[:lose] = "You have run out of ammo!"
+      redirect_to games_lose_path
+    end
+    @player = @game.player
+    @arrow = @game.arrow
+    next_rooms
+    check_senses
+    room_choices
+    if @right_room == @game.wumpit
+      redirect_to games_win_path
+    end
+  end
+
+  def shoot_left
+    @arrow = @game.arrow
+    @game.update(arrow: @arrow -= 1)
+    if @arrow == 0
+      flash[:lose] = "You have run out of ammo!"
+      redirect_to games_lose_path
+    end
+    @player = @game.player
+    @arrow = @game.arrow
+    next_rooms
+    check_senses
+    room_choices
+    if @left_room == @game.wumpit
+      redirect_to games_win_path
+    end
   end
 
   def lose
+  end
 
+  def win
   end
 
   private
@@ -91,8 +133,8 @@ class GamesController < ApplicationController
   end
 
   def room_choices
-    @first_room = @rooms[0]
-    @second_room = @rooms[1]
-    @third_room = @rooms[2]
+    @back_room = @rooms[0]
+    @left_room = @rooms[1]
+    @right_room = @rooms[2]
   end
 end

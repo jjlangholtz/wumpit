@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   get 'games/move'
   post 'games/move'
 
-  get 'games/shoot'
+  get 'games/shoot_back'
+  get 'games/shoot_left'
+  get 'games/shoot_right'
 
   get 'games/start'
+
+  get 'games/win'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
