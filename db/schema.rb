@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626211831) do
+ActiveRecord::Schema.define(version: 20140627014000) do
 
   create_table "games", force: true do |t|
     t.integer  "room"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140626211831) do
     t.datetime "updated_at"
     t.integer  "pit_one"
     t.integer  "pit_two"
+    t.integer  "bat_one"
+    t.integer  "bat_two"
   end
 
 end

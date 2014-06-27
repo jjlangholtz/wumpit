@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'games/bat'
   get 'games/move'
   post 'games/move'
 
