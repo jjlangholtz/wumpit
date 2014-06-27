@@ -47,4 +47,8 @@ class Game < ActiveRecord::Base
   def room_has_bat?(room)
     room == self.bat_one || room == self.bat_two
   end
+
+  def room_has_wumpit?(room)
+    room == self.wumpit
+  end
 end

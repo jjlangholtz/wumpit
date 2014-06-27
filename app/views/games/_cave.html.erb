@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="columns large-4">
+    <%= button_to "#{@first_room}", action: "move", params: { player: @first_room } %>
+  </div>
+  <div class="columns large-4">
+    <%= link_to "I am in room #{@player}", games_move_path, class: 'button round' %>
+    <%= button_to "#{@second_room}", action: "move", params: { player: @second_room } %>
+  </div>
+  <div class="columns large-4">
+    <%= button_to "#{@third_room}", action: "move", params: { player: @third_room } %>
+  </div>
+</div>

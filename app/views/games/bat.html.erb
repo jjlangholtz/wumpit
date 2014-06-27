@@ -1,5 +1,2 @@
-<%= link_to "I am in room #{@player}", games_move_path, class: 'button round' %>
-<%= button_to "#{@first_room}", action: "move", params: { player: @first_room } %>
-<%= button_to "#{@second_room}", action: "move", params: { player: @second_room } %>
-<%= button_to "#{@third_room}", action: "move", params: { player: @third_room } %>
+<%= render "cave" %>
 

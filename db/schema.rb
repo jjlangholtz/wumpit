@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627014000) do
+ActiveRecord::Schema.define(version: 20140627031622) do
 
   create_table "games", force: true do |t|
     t.integer  "room"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140627014000) do
     t.integer  "pit_two"
     t.integer  "bat_one"
     t.integer  "bat_two"
+    t.integer  "wumpit"
   end
 
 end

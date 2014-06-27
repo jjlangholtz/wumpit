@@ -42,6 +42,9 @@ class GamesController < ApplicationController
     if @rooms.include?(@game.bat_one) || @rooms.include?(@game.bat_two)
       flash.now[:bat] = "You hear wings flapping"
     end
+    if @rooms.include?(@game.wumpit)
+      flash.now[:wumpit] = "You smell a foul stench"
+    end
   end
 
   def room_choices
