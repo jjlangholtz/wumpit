@@ -1,12 +1,21 @@
 <div class="row">
-  <div class="columns large-4">
-    <%= button_to "#{@first_room}", action: "move", params: { player: @first_room } %>
+  <div class="columns large-3">
+    <% @arrow.times do %>
+      <i class="fa fa-long-arrow-right"></i></br>
+    <% end %>
   </div>
-  <div class="columns large-4">
-    <%= link_to "I am in room #{@player}", games_move_path, class: 'button round' %>
-    <%= button_to "#{@second_room}", action: "move", params: { player: @second_room } %>
+  <div class="columns large-3">
+    <%= button_to "#{@first_room}", { action: "move", params: { player: @first_room } }, class: 'button round' %>
+    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
   </div>
-  <div class="columns large-4">
-    <%= button_to "#{@third_room}", action: "move", params: { player: @third_room } %>
+  <div class="columns large-3">
+    <i class="fa fa-user"></i></br>
+    <%= "I am in room #{@player}" %>
+    <%= button_to "#{@second_room}", { action: "move", params: { player: @second_room } }, class: 'button round' %>
+    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
+  </div>
+  <div class="columns large-3">
+    <%= button_to "#{@third_room}", { action: "move", params: { player: @third_room } }, class: 'button round' %>
+    <%= link_to "Shoot", games_shoot_path, class: 'button round' %>
   </div>
 </div>

@@ -12,9 +12,13 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-    <% end -%>
+    <div class="row">
+      <div class="columns large-centered large-4">
+        <% flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, class: name %>
+        <% end -%>
+      </div>
+    </div>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>

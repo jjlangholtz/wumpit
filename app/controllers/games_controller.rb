@@ -1,9 +1,27 @@
 class GamesController < ApplicationController
   before_action :set_game
 
+  def start
+    available_rooms = (1..20).to_a.shuffle!
+    @game = Game.create(room: 20,
+                        arrow: 5,
+                        player: available_rooms.pop,
+                        pit_one: available_rooms.pop,
+                        pit_two: available_rooms.pop,
+                        bat_one: available_rooms.pop,
+                        bat_two: available_rooms.pop,
+                        wumpit: available_rooms.pop)
+    @player = @game.player
+    @arrow = @game.arrow
+    next_rooms
+    check_senses
+    room_choices
+  end
+
   def move
     @game.update(player: params[:player])
     @player = @game.player
+    @arrow = @game.arrow
     if @game.room_has_bat?(@player)
       redirect_to games_bat_path
     end
@@ -16,6 +34,17 @@ class GamesController < ApplicationController
     flash.now[:bat_move] = "Bats have carried you to a new room!"
     @game.update(player: rand(20) + 1)
     @player = @game.player
+    @arrow = @game.arrow
+    next_rooms
+    check_senses
+    room_choices
+  end
+
+  def shoot
+    @arrow = @game.arrow
+    @game.update(arrow: @arrow -= 1)
+    @player = @game.player
+    @arrow = @game.arrow
     next_rooms
     check_senses
     room_choices
@@ -28,7 +57,7 @@ class GamesController < ApplicationController
   end
 
   def set_game
-    @game = Game.first
+    @game = Game.last
   end
 
   def next_rooms

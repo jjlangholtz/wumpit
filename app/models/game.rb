@@ -4,9 +4,9 @@ class Game < ActiveRecord::Base
     when 1
       [2, 5, 18]
     when 2
-      [1, 3, 20]
+      [3, 1, 20]
     when 3
-      [2, 4, 10]
+      [4, 2, 10]
     when 4
       [3, 5, 8]
     when 5
