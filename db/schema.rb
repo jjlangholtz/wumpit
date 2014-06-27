@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626191426) do
+ActiveRecord::Schema.define(version: 20140626211831) do
 
   create_table "games", force: true do |t|
     t.integer  "room"
     t.integer  "player"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pit_one"
+    t.integer  "pit_two"
   end
 
 end
