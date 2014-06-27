@@ -1,3 +1,13 @@
+<div class="columns large-centered large-5">
+  <% flash.each do |name, msg| -%>
+    <% if msg.is_a?(String) %>
+      <div data-alert class="alert-box warning round <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+        <%= content_tag :div, msg %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 <div class="columns large-centered large-6 panel">
   <h1>You Lose!</h1>
   <%= link_to "Play Again?", games_start_path, class: 'button' %>

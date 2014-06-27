@@ -63,6 +63,13 @@ class GamesController < ApplicationController
     room_choices
     if @back_room == @game.wumpit
       redirect_to games_win_path
+    else
+      flash.now[:wumpit] = "The wumpit has moved rooms!"
+      @game.update(wumpit: @wumpit_rooms.sample)
+      if @game.room_has_wumpit?(@player)
+        flash[:lose] = "The wumpit noms on your face!"
+        redirect_to games_lose_path
+      end
     end
   end
 
@@ -80,6 +87,13 @@ class GamesController < ApplicationController
     room_choices
     if @right_room == @game.wumpit
       redirect_to games_win_path
+    else
+      flash.now[:wumpit] = "The wumpit has moved rooms!"
+      @game.update(wumpit: @wumpit_rooms.sample)
+      if @game.room_has_wumpit?(@player)
+        flash[:lose] = "The wumpit noms on your face!"
+        redirect_to games_lose_path
+      end
     end
   end
 
@@ -97,6 +111,13 @@ class GamesController < ApplicationController
     room_choices
     if @left_room == @game.wumpit
       redirect_to games_win_path
+    else
+      flash.now[:wumpit] = "The wumpit has moved rooms!"
+      @game.update(wumpit: @wumpit_rooms.sample)
+      if @game.room_has_wumpit?(@player)
+        flash[:lose] = "The wumpit noms on your face!"
+        redirect_to games_lose_path
+      end
     end
   end
 
@@ -118,6 +139,7 @@ class GamesController < ApplicationController
 
   def next_rooms
     @rooms = @game.rooms_available(@player)
+    @wumpit_rooms = @game.rooms_available(@game.wumpit)
   end
 
   def check_senses

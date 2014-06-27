@@ -55,6 +55,11 @@
         <% end %>
       </div>
     </div>
+    <div class="row">
+      <div class="columns large-centered large-10 text-center">
+        <h1><%= "#{(Time.now - @game.created_at).to_i} s" %></h1>
+      </div>
+    </div>
   </div>
 
   <div class="columns large-2">
