@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+
   get 'games/bat'
+
+  get 'games/lose'
 
   get 'games/move'
   post 'games/move'

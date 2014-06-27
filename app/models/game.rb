@@ -51,4 +51,8 @@ class Game < ActiveRecord::Base
   def room_has_wumpit?(room)
     room == self.wumpit
   end
+
+  def room_has_pit?(room)
+    room == self.pit_one || room == self.pit_two
+  end
 end

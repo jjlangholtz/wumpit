@@ -12,6 +12,7 @@ class GamesController < ApplicationController
                         bat_two: available_rooms.pop,
                         wumpit: available_rooms.pop)
     @player = @game.player
+    session[:player] = @player
     @arrow = @game.arrow
     next_rooms
     check_senses
@@ -20,10 +21,16 @@ class GamesController < ApplicationController
 
   def move
     @game.update(player: params[:player])
-    @player = @game.player
+    @player = @game.player || session[:player]
     @arrow = @game.arrow
     if @game.room_has_bat?(@player)
       redirect_to games_bat_path
+    end
+    if @game.room_has_pit?(@player)
+      redirect_to games_lose_path
+    end
+    if @game.room_has_wumpit?(@player)
+      redirect_to games_lose_path
     end
     next_rooms
     check_senses
@@ -43,11 +50,18 @@ class GamesController < ApplicationController
   def shoot
     @arrow = @game.arrow
     @game.update(arrow: @arrow -= 1)
+    if @arrow == 0
+      redirect_to games_lose_path
+    end
     @player = @game.player
     @arrow = @game.arrow
     next_rooms
     check_senses
     room_choices
+  end
+
+  def lose
+
   end
 
   private
