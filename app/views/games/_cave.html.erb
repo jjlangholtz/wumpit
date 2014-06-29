@@ -37,7 +37,7 @@
       </div>
       <div class="columns large-2 text-center">
         <i class="fa fa-user"></i></br>
-        <p class="label round"><%= "Room #{@player}" %></p>
+        <p class="label round"><%= "Room #{@game.player}" %></p>
       </div>
       <div class="columns large-5 text-center">
         <%= button_to "#{@right_room}", { action: "move", params: { player: @right_room } }, class: 'button round' %>
@@ -64,7 +64,7 @@
 
   <div class="columns large-2">
     <h3><strong>Ammo</strong></h3>
-    <% @arrow.times do %>
+    <% @game.arrow.times do %>
       <i class="fa fa-bomb"></i></br>
     <% end %>
   </div>

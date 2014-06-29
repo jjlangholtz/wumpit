@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game
+  before_action :save_game
 
   def start
     available_rooms = (1..20).to_a.shuffle!
@@ -12,11 +13,25 @@ class GamesController < ApplicationController
                         bat_two: available_rooms.pop,
                         wumpit: available_rooms.pop)
     @player = @game.player
-    session[:player] = @player
     @arrow = @game.arrow
     next_rooms
     check_senses
     room_choices
+  end
+
+  def resume
+    @game.room = session[:room]
+    @game.player = session[:player]
+    @game.bat_one = session[:bat_one]
+    @game.bat_two = session[:bat_two]
+    @game.pit_one = session[:pit_one]
+    @game.pit_two = session[:pit_two]
+    @game.wumpit = session[:wumpit]
+    @game.arrow = session[:arrow]
+    next_rooms
+    check_senses
+    room_choices
+    render "move"
   end
 
   def move
@@ -138,7 +153,7 @@ class GamesController < ApplicationController
   end
 
   def next_rooms
-    @rooms = @game.rooms_available(@player)
+    @rooms = @game.rooms_available(@game.player)
     @wumpit_rooms = @game.rooms_available(@game.wumpit)
   end
 
@@ -158,5 +173,16 @@ class GamesController < ApplicationController
     @back_room = @rooms[0]
     @left_room = @rooms[1]
     @right_room = @rooms[2]
+  end
+
+  def save_game
+    session[:room] = @game.room
+    session[:player] = @game.player
+    session[:pit_one] = @game.pit_one
+    session[:pit_two] = @game.pit_two
+    session[:bat_one] = @game.bat_one
+    session[:bat_two] = @game.bat_two
+    session[:wumpit] = @game.wumpit
+    session[:arrow] = @game.arrow
   end
 end
