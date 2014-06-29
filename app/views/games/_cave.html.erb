@@ -16,15 +16,23 @@
 <div class="row">
   <div class="columns large-10">
     <div class="row">
-      <div class="columns large-centered large-5">
+      <div class="columns large-3 text-center">
+        <h2>Moves</h2>
+        <h1><%= @game.counter %></h1>
+      </div>
+      <div class="columns large-6 message-block">
         <% flash.each do |name, msg| -%>
           <% if msg.is_a?(String) %>
-            <div data-alert class="alert-box warning round <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+            <div data-alert class="alert-box round <%= name.to_s == 'hint' ? 'info' : 'warning' %>">
               <%= content_tag :div, msg %>
               <a href="#" class="close">&times;</a>
             </div>
           <% end %>
         <% end %>
+      </div>
+      <div class="columns large-3 text-center left">
+        <h2>Time</h2>
+        <h1><%= "#{(Time.now - @game.created_at).to_i} s" %></h1>
       </div>
     </div>
 
@@ -55,11 +63,6 @@
         <% end %>
       </div>
     </div>
-    <div class="row">
-      <div class="columns large-centered large-10 text-center">
-        <h1><%= "#{(Time.now - @game.created_at).to_i} s" %></h1>
-      </div>
-    </div>
   </div>
 
   <div class="columns large-2">
@@ -71,24 +74,15 @@
 </div>
 
 <div id="myModal" class="reveal-modal" data-reveal>
-  <h2>INTRODUCTION</h2>
-  <p class="lead">Deep within a maze of caverns and twisting tunnels lives a creature 
-known as the Wumpus. Protected by giant bats and pits of slime, the 
-Wumpus feeds on unwary visitors to its cavern.</p>
-  <p>You are the hunter who tracks the Wumpus to its lair! Armed 
-with a five arrows, you explore the maze of caverns, searching for 
-clues to tell you where the Wumpus is hiding. Once you think you've 
-found the Wumpus, you fire your arrow into its cavern.</p>
-  <p>The Wumpit on Rails combines the excitement of a hunt with a new more engaging interface.</p>
-  <p>Play each game in a new, randomly generated maze
-Choose a maze based on your own level of skill (coming soon)
-Challenge your powers of deduction, memory, and concentration with 
-exciting options you can include in the hunt.</p>
-  <h2>GETTING STARTED</h2>
-  <p>Option Selection
-  In the initial release you can choose from one option (blindfold).  In future releases we plan to make the game easier by providing a full map to view where you are and where you have been in the cave as well as more challenging caves as well.</p>
-  <p>BLINDFOLD - The Blindfold option tests your memory by erasing the map 
-behind you. Only the cavern or tunnel segment you are in appears on 
-the screen (current version)</p>
+  <h6>Getting Started with "Wumpit"</h6>
+  <p>After you start the game, a hidden maze is constructed. Every time you start a new game you enter a unique cave. The game starts in an empty cavern and you will see three rooms plus your current location. You can move to any adjacent room by clicking it. You also have the choice of throwing a grenade instead of moving. If you choose to throw a grenade it can either wake the Wumpit or kill it depending on it's proximity.</p>
+  <h6>Tracking Down The Wumpit</h6>
+  <p>The Wumpit makes its lair in one of the caverns in the maze. You know you're getting near the Wumpit when you get an alert that you smell a foul stench. NEVER enter the Wumpit's lair, or else you lose the game.</p>
+  <h6>Once The Wumpit Is Located</h6>
+  <p>When you think you know where the Wumpit is, it's time to throw your grenade. Click the orange grenade to throw it into the adjacent room. If the cavern you throw into is the Wumpit's lair, you win! If you are wrong, the Wumpit hears the greande and comes looking for you. You only have five grenades, so if you use them all you lose.</p>
+  <h6>Caution! Pit</h6>
+  <p>When you enter a cavern and receive a message that there is a draft you are approaching a pit. Pits are vast pools of stagnant water that fill a cavern. If you enter a pit cavern, you fall in and lose the game.</p>
+  <h6>Do Not Disturb The Bats</h6>
+  <p>Some of the caverns in the maze are inhabited by very large bats. The first time you enter a cavern near the bats you will receive an alert that there are bats in the one of the next rooms. If you enter a cavern with bats, you will disturb them. If disturbed, they will pick you up and carry you off to anywhere in the maze...a tunnel, a pit, the Wumpit's lair, or even the cavern where your flight began. Then they choose a new place to live.</p>
   <a class="close-reveal-modal">&#215;</a>
 </div>

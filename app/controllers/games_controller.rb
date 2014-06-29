@@ -6,6 +6,7 @@ class GamesController < ApplicationController
     available_rooms = (1..20).to_a.shuffle!
     @game = Game.create(room: 20,
                         arrow: 5,
+                        counter: 0,
                         player: available_rooms.pop,
                         pit_one: available_rooms.pop,
                         pit_two: available_rooms.pop,
@@ -28,6 +29,7 @@ class GamesController < ApplicationController
     @game.pit_two = session[:pit_two]
     @game.wumpit = session[:wumpit]
     @game.arrow = session[:arrow]
+    @game.counter = session[:counter]
     next_rooms
     check_senses
     room_choices
@@ -36,17 +38,17 @@ class GamesController < ApplicationController
 
   def move
     @game.update(player: params[:player])
-    @player = @game.player || session[:player]
+    @player = @game.player
     @arrow = @game.arrow
     if @game.room_has_bat?(@player)
       redirect_to games_bat_path
     end
     if @game.room_has_pit?(@player)
-      flash[:lose] = "You have fallen into a pit!"
+      flash[:lose] = "You have fallen into a pit! You lose!"
       redirect_to games_lose_path
     end
     if @game.room_has_wumpit?(@player)
-      flash[:lose] = "You have been eaten by the wumpit!"
+      flash[:lose] = "You have been eaten by the wumpit! You lose!"
       redirect_to games_lose_path
     end
     next_rooms
@@ -55,6 +57,7 @@ class GamesController < ApplicationController
   end
 
   def bat
+    @game.counter -= 1
     flash.now[:bat_move] = "Bats have carried you to a new room!"
     @game.update(player: rand(20) + 1)
     @player = @game.player
@@ -68,7 +71,7 @@ class GamesController < ApplicationController
     @arrow = @game.arrow
     @game.update(arrow: @arrow -= 1)
     if @arrow == 0
-      flash[:lose] = "You have run out of ammo!"
+      flash[:lose] = "You have run out of ammo! You lose!"
       redirect_to games_lose_path
     end
     @player = @game.player
@@ -82,7 +85,7 @@ class GamesController < ApplicationController
       flash.now[:wumpit] = "The wumpit has moved rooms!"
       @game.update(wumpit: @wumpit_rooms.sample)
       if @game.room_has_wumpit?(@player)
-        flash[:lose] = "The wumpit noms on your face!"
+        flash[:lose] = "You startled the wumpit and he found you! You lose!"
         redirect_to games_lose_path
       end
     end
@@ -92,7 +95,7 @@ class GamesController < ApplicationController
     @arrow = @game.arrow
     @game.update(arrow: @arrow -= 1)
     if @arrow == 0
-      flash[:lose] = "You have run out of ammo!"
+      flash[:lose] = "You have run out of ammo! You lose!"
       redirect_to games_lose_path
     end
     @player = @game.player
@@ -106,7 +109,7 @@ class GamesController < ApplicationController
       flash.now[:wumpit] = "The wumpit has moved rooms!"
       @game.update(wumpit: @wumpit_rooms.sample)
       if @game.room_has_wumpit?(@player)
-        flash[:lose] = "The wumpit noms on your face!"
+        flash[:lose] = "You startled the wumpit and he found you! You lose!"
         redirect_to games_lose_path
       end
     end
@@ -116,7 +119,7 @@ class GamesController < ApplicationController
     @arrow = @game.arrow
     @game.update(arrow: @arrow -= 1)
     if @arrow == 0
-      flash[:lose] = "You have run out of ammo!"
+      flash[:lose] = "You have run out of ammo! You lose!"
       redirect_to games_lose_path
     end
     @player = @game.player
@@ -130,7 +133,7 @@ class GamesController < ApplicationController
       flash.now[:wumpit] = "The wumpit has moved rooms!"
       @game.update(wumpit: @wumpit_rooms.sample)
       if @game.room_has_wumpit?(@player)
-        flash[:lose] = "The wumpit noms on your face!"
+        flash[:lose] = "You startled the wumpit and he found you! You lose!"
         redirect_to games_lose_path
       end
     end
@@ -150,6 +153,26 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.last
+    @game.counter += 1
+    hint_message = rand(7)
+    case hint_message
+    when 0
+      flash.now[:hint] = "Click the orange grenades to kill the Wumpit!"
+    when 1
+      flash.now[:hint] = "Did you know Clinton Dreisbach has a pet Wumpit!"
+    when 2
+      flash.now[:hint] = "When you run out of grenades you lose!"
+    when 
+      flash.now[:hint] = "Your time and moves gauge your performance!"
+    when 4
+      flash.now[:hint] = "Click on any blue 'Rooms' to move your player!"
+    when 5
+      flash.now[:hint] = "Have questions? Check out the 'Rules'"
+    when 6
+      flash.now[:hint] = "There are two pits so be careful not to fall in!"
+    when 7
+      flash.now[:hint] = "Don't get caught by bats, they are in two rooms!"
+    end
   end
 
   def next_rooms
@@ -184,5 +207,6 @@ class GamesController < ApplicationController
     session[:bat_two] = @game.bat_two
     session[:wumpit] = @game.wumpit
     session[:arrow] = @game.arrow
+    session[:counter] = @game.counter
   end
 end

@@ -1,5 +1,22 @@
 <div class="columns large-centered large-8 panel text-center">
   <h1>Wumpit</h1>
   <%= link_to "New Game", games_start_path, class: 'button' %>
+  <a href="#" data-reveal-id="myModal" class="button">
+    Rules
+  </a>
   <%= link_to "Resume", games_resume_path, class: 'button' %>
+</div>
+
+<div id="myModal" class="reveal-modal" data-reveal>
+  <h6>Getting Started with "Wumpit"</h6>
+  <p>After you start the game, a hidden maze is constructed. Every time you start a new game you enter a unique cave. The game starts in an empty cavern and you will see three rooms plus your current location. You can move to any adjacent room by clicking it. You also have the choice of throwing a grenade instead of moving. If you choose to throw a grenade it can either wake the Wumpit or kill it depending on it's proximity.</p>
+  <h6>Tracking Down The Wumpit</h6>
+  <p>The Wumpit makes its lair in one of the caverns in the maze. You know you're getting near the Wumpit when you get an alert that you smell a foul stench. NEVER enter the Wumpit's lair, or else you lose the game.</p>
+  <h6>Once The Wumpit Is Located</h6>
+  <p>When you think you know where the Wumpit is, it's time to throw your grenade. Click the orange grenade to throw it into the adjacent room. If the cavern you throw into is the Wumpit's lair, you win! If you are wrong, the Wumpit hears the greande and comes looking for you. You only have five grenades, so if you use them all you lose.</p>
+  <h6>Caution! Pit</h6>
+  <p>When you enter a cavern and receive a message that there is a draft you are approaching a pit. Pits are vast pools of stagnant water that fill a cavern. If you enter a pit cavern, you fall in and lose the game.</p>
+  <h6>Do Not Disturb The Bats</h6>
+  <p>Some of the caverns in the maze are inhabited by very large bats. The first time you enter a cavern near the bats you will receive an alert that there are bats in the one of the next rooms. If you enter a cavern with bats, you will disturb them. If disturbed, they will pick you up and carry you off to anywhere in the maze...a tunnel, a pit, the Wumpit's lair, or even the cavern where your flight began. Then they choose a new place to live.</p>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
