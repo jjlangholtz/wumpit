@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629185237) do
+ActiveRecord::Schema.define(version: 20140630015429) do
 
   create_table "games", force: true do |t|
     t.integer  "room"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20140629185237) do
     t.integer  "wumpit"
     t.integer  "arrow"
     t.integer  "counter"
+    t.integer  "timer"
+  end
+
+  create_table "high_scores", force: true do |t|
+    t.string   "name"
+    t.integer  "moves"
+    t.integer  "seconds"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "rank"
   end
 
 end

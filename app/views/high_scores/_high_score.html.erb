@@ -1,0 +1,14 @@
+<%= div_for(high_score, class: 'panel radius') do %>
+  <div class="columns large-2">
+    <%= high_score.rank %>
+  </div>
+  <div class="columns large-5">
+    <%= high_score.name %>
+  </div>
+  <div class="columns large-3">
+    <%= high_score.moves %>
+  </div>
+  <div class="columns large-2">
+    <%= "#{high_score.seconds}" + " s" %>
+  </div>
+<% end %>

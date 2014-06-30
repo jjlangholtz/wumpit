@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   get 'games/start'
 
   get 'games/win'
+
+  resources :high_scores, only: [:new, :create]
 end

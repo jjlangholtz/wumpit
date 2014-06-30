@@ -1,6 +1,13 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+img {
+  z-index: -1;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
 h1 {
   font-size: 4.5em;
 }
@@ -38,6 +45,7 @@ a i.fa.fa-bomb {
 
 .label {
   background-color: #f08a24;
+  font-size: 1.2em;
 }
 
 .reveal-modal p {

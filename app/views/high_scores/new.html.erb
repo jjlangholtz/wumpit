@@ -1,0 +1,8 @@
+<div class="columns large-6 large-centered text-center">
+  <%= form_for @high_score do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.submit 'Send', class: 'button' %>
+  <% end %>
+</div>

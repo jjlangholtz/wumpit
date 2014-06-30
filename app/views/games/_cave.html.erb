@@ -7,6 +7,10 @@
     <i class="fa fa-file-text-o"></i>
     <label>Rules</label>
   </a>
+  <a href="#" data-reveal-id="leaderModal" class="item">
+    <i class="fa fa-list-ol"></i>
+    <label>Leader</label>
+  </a>
   <a href="<%= games_start_path %>" class="item">
     <i class="fa fa-power-off"></i>
     <label>Start</label>
@@ -85,4 +89,26 @@
   <h6>Do Not Disturb The Bats</h6>
   <p>Some of the caverns in the maze are inhabited by very large bats. The first time you enter a cavern near the bats you will receive an alert that there are bats in the one of the next rooms. If you enter a cavern with bats, you will disturb them. If disturbed, they will pick you up and carry you off to anywhere in the maze...a tunnel, a pit, the Wumpit's lair, or even the cavern where your flight began. Then they choose a new place to live.</p>
   <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="leaderModal" class="reveal-modal" data-reveal>
+  <div class="row">
+    <div class="columns large-2">
+      <h2>Rank</h2>
+    </div>
+    <div class="columns large-4">
+      <h2>Name</h2>
+    </div>
+    <div class="columns large-3">
+      <h2>Moves</h2>
+    </div>
+    <div class="columns large-3">
+      <h2>Time</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns large-12">
+      <%= render @high_scores %>
+    </div>
+  </div>
 </div>

@@ -7,6 +7,7 @@ class GamesController < ApplicationController
     @game = Game.create(room: 20,
                         arrow: 5,
                         counter: 0,
+                        timer: 1,
                         player: available_rooms.pop,
                         pit_one: available_rooms.pop,
                         pit_two: available_rooms.pop,
@@ -29,7 +30,6 @@ class GamesController < ApplicationController
     @game.pit_two = session[:pit_two]
     @game.wumpit = session[:wumpit]
     @game.arrow = session[:arrow]
-    @game.counter = session[:counter]
     next_rooms
     check_senses
     room_choices
@@ -80,6 +80,8 @@ class GamesController < ApplicationController
     check_senses
     room_choices
     if @back_room == @game.wumpit
+      @game.timer = (Time.now - @game.created_at).to_i
+      @game.save
       redirect_to games_win_path
     else
       flash.now[:wumpit] = "The wumpit has moved rooms!"
@@ -104,6 +106,8 @@ class GamesController < ApplicationController
     check_senses
     room_choices
     if @right_room == @game.wumpit
+      @game.timer = (Time.now - @game.created_at).to_i
+      @game.save
       redirect_to games_win_path
     else
       flash.now[:wumpit] = "The wumpit has moved rooms!"
@@ -128,6 +132,8 @@ class GamesController < ApplicationController
     check_senses
     room_choices
     if @left_room == @game.wumpit
+      @game.timer = (Time.now - @game.created_at).to_i
+      @game.save
       redirect_to games_win_path
     else
       flash.now[:wumpit] = "The wumpit has moved rooms!"
@@ -153,6 +159,8 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.last
+    HighScore.rank_high_scores
+    @high_scores = HighScore.order_best_scores
     @game.counter += 1
     hint_message = rand(7)
     case hint_message
@@ -207,6 +215,5 @@ class GamesController < ApplicationController
     session[:bat_two] = @game.bat_two
     session[:wumpit] = @game.wumpit
     session[:arrow] = @game.arrow
-    session[:counter] = @game.counter
   end
 end
