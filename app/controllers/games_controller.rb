@@ -158,7 +158,17 @@ class GamesController < ApplicationController
   end
 
   def set_game
-    @game = Game.last
+    @game = Game.last ||
+            Game.create(room: 20,
+                        arrow: 5,
+                        counter: 0,
+                        timer: 1,
+                        player: available_rooms.pop,
+                        pit_one: available_rooms.pop,
+                        pit_two: available_rooms.pop,
+                        bat_one: available_rooms.pop,
+                        bat_two: available_rooms.pop,
+                        wumpit: available_rooms.pop)
     HighScore.rank_high_scores
     @high_scores = HighScore.order_best_scores
     @game.counter += 1
