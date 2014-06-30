@@ -27,7 +27,7 @@
       <div class="columns large-6 message-block">
         <% flash.each do |name, msg| -%>
           <% if msg.is_a?(String) %>
-            <div data-alert class="alert-box round <%= name.to_s == 'hint' ? 'info' : 'warning' %>">
+            <div data-alert class="alert-box round <%= name.to_s == 'hint' ? 'info' : 'warning' %>" id="fourthStop">
               <%= content_tag :div, msg %>
               <a href="#" class="close">&times;</a>
             </div>
@@ -42,19 +42,19 @@
 
     <div class="row">
       <div class="columns large-5 text-center">
-        <%= button_to "#{@left_room}", { action: "move", params: { player: @left_room } }, class: 'button round' %>
+        <%= button_to "#{@left_room}", { action: "move", params: { player: @left_room } }, class: 'button round', id: 'secondStop' %>
         <%= link_to games_shoot_left_path do %>
           <i class="fa fa-bomb"></i>
         <% end %>
       </div>
       <div class="columns large-2 text-center">
         <i class="fa fa-user"></i></br>
-        <p class="label round"><%= "Room #{@game.player}" %></p>
+        <p class="label round" id="firstStop"><%= "Room #{@game.player}" %></p>
       </div>
       <div class="columns large-5 text-center">
         <%= button_to "#{@right_room}", { action: "move", params: { player: @right_room } }, class: 'button round' %>
         <%= link_to games_shoot_right_path do %>
-          <i class="fa fa-bomb"></i>
+          <i class="fa fa-bomb" id="thirdStop"></i>
         <% end %>
       </div>
     </div>
@@ -112,3 +112,19 @@
     </div>
   </div>
 </div>
+
+<!-- At the bottom of your page but inside of the body tag -->
+<ol class="joyride-list" data-joyride>
+  <li data-id="firstStop">
+    <p>Your current room is shown here.</p>
+  </li>
+  <li data-id="secondStop">
+    <p>To move to a new room click one of these.</p>
+  </li>
+  <li data-id="thirdStop">
+    <p>If you think you found the wumpit, throw a bomb in his room.</p>
+  </li>
+  <li data-id="fourthStop">
+    <p>Orange messages alert you of cave hazards.</p>
+  </li>
+</ol>
