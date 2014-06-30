@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game
-  before_action :save_game
+  before_action :set_game, except: :start
+  before_action :save_game, except: :start
 
   def start
     available_rooms = (1..20).to_a.shuffle!
@@ -14,6 +14,7 @@ class GamesController < ApplicationController
                         bat_one: available_rooms.pop,
                         bat_two: available_rooms.pop,
                         wumpit: available_rooms.pop)
+    @high_scores = []
     @player = @game.player
     @arrow = @game.arrow
     next_rooms
@@ -158,17 +159,7 @@ class GamesController < ApplicationController
   end
 
   def set_game
-    @game = Game.last ||
-            Game.create(room: 20,
-                        arrow: 5,
-                        counter: 0,
-                        timer: 1,
-                        player: available_rooms.pop,
-                        pit_one: available_rooms.pop,
-                        pit_two: available_rooms.pop,
-                        bat_one: available_rooms.pop,
-                        bat_two: available_rooms.pop,
-                        wumpit: available_rooms.pop)
+    @game = Game.last
     HighScore.rank_high_scores
     @high_scores = HighScore.order_best_scores
     @game.counter += 1
