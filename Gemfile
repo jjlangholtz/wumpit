@@ -31,6 +31,8 @@ gem 'guard-minitest', group: :development
 gem 'capybara'
 
 # Production
+gem 'unicorn'
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'
