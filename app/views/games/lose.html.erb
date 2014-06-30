@@ -1,5 +1,5 @@
+  <%= image_tag('clinton.jpeg') %>
 <div class="columns large-centered large-5 message-block">
-  <%= image_tag('clinton.png') %>
   <% flash.delete(:hint) %>
   <% flash.each do |name, msg| -%>
     <% if msg.is_a?(String) %>
@@ -11,6 +11,7 @@
   <% end %>
 </div>
 <div class="columns large-centered large-6 text-center">
-  <h1>YOU LOSE!</h1>
+  <h1 class="lose">SORRY!</h1>
+  <h1 class="lose">YOU LOSE!</h1>
   <%= link_to "Play Again?", games_start_path, class: 'button expand' %>
 </div>

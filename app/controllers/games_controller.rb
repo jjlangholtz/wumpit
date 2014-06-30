@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, except: :start
   before_action :save_game, except: :start
+  before_action :set_leaderboard
 
   def start
     available_rooms = (1..20).to_a.shuffle!
@@ -14,7 +15,6 @@ class GamesController < ApplicationController
                         bat_one: available_rooms.pop,
                         bat_two: available_rooms.pop,
                         wumpit: available_rooms.pop)
-    @high_scores = []
     @player = @game.player
     @arrow = @game.arrow
     next_rooms
@@ -160,8 +160,6 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.last
-    HighScore.rank_high_scores
-    @high_scores = HighScore.order_best_scores
     @game.counter += 1
     hint_message = rand(7)
     case hint_message
@@ -182,6 +180,11 @@ class GamesController < ApplicationController
     when 7
       flash.now[:hint] = "Don't get caught by bats, they are in two rooms!"
     end
+  end
+
+  def set_leaderboard
+    HighScore.rank_high_scores
+    @high_scores = HighScore.order_best_scores || []
   end
 
   def next_rooms
