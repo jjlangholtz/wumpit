@@ -36,13 +36,13 @@
       </div>
       <div class="columns large-3 text-center left">
         <h2>Time</h2>
-        <h1><%= "#{(Time.now - @game.created_at).to_i} s" %></h1>
+        <h1 id="timer"><%= "#{(Time.now - @game.created_at).to_i} s" %></h1>
       </div>
     </div>
 
     <div class="row">
       <div class="columns large-5 text-center">
-        <%= button_to "#{@left_room}", { action: "move", params: { player: @left_room } }, class: 'button round', id: 'secondStop' %>
+        <%= button_to "#{@left_room}", { action: "move", params: { player: @left_room } }, class: 'button round' %>
         <%= link_to games_shoot_left_path do %>
           <i class="fa fa-bomb"></i>
         <% end %>
@@ -70,10 +70,12 @@
   </div>
 
   <div class="columns large-2">
-    <h3><strong>Ammo</strong></h3>
-    <% @game.arrow.times do %>
-      <i class="fa fa-bomb"></i></br>
-    <% end %>
+    <ul>
+      <h3><strong>Ammo</strong></h3>
+      <% @game.arrow.times do %>
+        <i class="fa fa-bomb"></i></br>
+      <% end %>
+    </ul>
   </div>
 </div>
 
@@ -111,20 +113,5 @@
       <%= render @high_scores %>
     </div>
   </div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
-
-<!-- At the bottom of your page but inside of the body tag -->
-<ol class="joyride-list" data-joyride>
-  <li data-id="firstStop">
-    <p>Your current room is shown here.</p>
-  </li>
-  <li data-id="secondStop">
-    <p>To move to a new room click one of these.</p>
-  </li>
-  <li data-id="thirdStop">
-    <p>If you think you found the wumpit, throw a bomb in his room.</p>
-  </li>
-  <li data-id="fourthStop">
-    <p>Orange messages alert you of cave hazards.</p>
-  </li>
-</ol>

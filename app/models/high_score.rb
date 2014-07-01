@@ -2,7 +2,7 @@ class HighScore < ActiveRecord::Base
   validates :name, presence: true
 
   def self.order_best_scores
-    HighScore.order(moves: :asc, seconds: :asc).limit(10)
+    HighScore.order(moves: :asc, seconds: :asc).limit(5)
   end
 
   def self.rank_high_scores
