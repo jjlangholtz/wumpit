@@ -27,7 +27,7 @@
       <div class="columns large-6 message-block">
         <% flash.each do |name, msg| -%>
           <% if msg.is_a?(String) %>
-            <div data-alert class="alert-box round <%= name.to_s == 'hint' ? 'info' : 'warning' %>" id="fourthStop">
+            <div data-alert class="alert-box round <%= name.to_s == 'hint' ? 'info' : 'warning' %>">
               <%= content_tag :div, msg %>
               <a href="#" class="close">&times;</a>
             </div>
@@ -76,6 +76,7 @@
         <i class="fa fa-bomb"></i></br>
       <% end %>
     </ul>
+    <%= link_to "Wizard", games_wizard_path, method: 'post', class: 'button tiny', remote: true %>
   </div>
 </div>
 

@@ -52,9 +52,14 @@ class GamesController < ApplicationController
       flash[:lose] = "You have been eaten by the wumpit! You lose!"
       redirect_to games_lose_path
     end
-    next_rooms
-    check_senses
-    room_choices
+    respond_to do |format|
+      format.html do
+        next_rooms
+        check_senses
+        room_choices
+      end
+      format.js {}
+    end
   end
 
   def bat
@@ -143,6 +148,12 @@ class GamesController < ApplicationController
         flash[:lose] = "You startled the wumpit and he found you! You lose!"
         redirect_to games_lose_path
       end
+    end
+  end
+
+  def wizard
+    respond_to do |format|
+      format.js
     end
   end
 

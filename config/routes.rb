@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 
   get 'games/win'
 
+  post 'games/wizard'
+
   resources :high_scores, only: [:new, :create]
 end
