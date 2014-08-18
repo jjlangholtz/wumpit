@@ -4,15 +4,11 @@ This game is a Rails rendition of the famous Hunt the Wumpus Game.
 
 ## Installation
 
-Add this line to your application's Terminal
-
-$ bundle install
-And then execute:
-
-$ rake db:migrate
-And then open your local server
-
-$ rails server
+```
+bundle install
+rake db:migrate
+rails server
+```
 
 ## INTRODUCTION
 
